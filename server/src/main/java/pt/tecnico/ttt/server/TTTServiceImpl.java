@@ -26,7 +26,11 @@ public class TTTServiceImpl extends TTTGrpc.TTTImplBase {
         // StreamObserver is used to represent the gRPC stream between the server and
         // client in order to send the appropriate responses (or errors, if any occur).
 
-        PlayResponse response = PlayResponse.newBuilder().setResponse(ttt.play(request.getRow(), request.getColumn(), request.getPlayer())).build();
+        int row = request.getRow();
+        int column = request.getColumn();
+        int player = request.getPlayer();
+
+        PlayResponse response = PlayResponse.newBuilder().setResponse(ttt.play(row, column, player)).build();
 
         // Send a single response through the stream.
         responseObserver.onNext(response);
